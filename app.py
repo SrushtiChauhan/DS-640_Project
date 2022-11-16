@@ -117,6 +117,7 @@ df['daily_pc_returns'] = round(df['daily_pc_returns'], 2)
 if (len(ticker_details) > 0):
     st.subheader(f'{ticker_name} Stock Data')
     st.dataframe(df.tail(), 1500, 210)
+    st.line_chart(df.close)
     st.line_chart(df.daily_pc_returns)
 else:   
     st.write("No Data Found!")
@@ -187,6 +188,8 @@ def get_forecast(ticker_name):
     return results
 
 df_results = get_forecast(ticker_name)
+st.dataframe(df_results.head(), 1500, 210)
+st.dataframe(df_results.tail(), 1500, 210)
 # Plot the forecast values 
 fig = plt.figure() 
 df_results['Actual'].plot(figsize = (20, 5), legend = True, title=ticker_name) 
